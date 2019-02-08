@@ -34,7 +34,7 @@ namespace WingsOn.Api.BusinessLogic.Factories
             }
 
             var numberId = int.Parse(maxNumber.Split("-")[1]) + 1;
-            return numberId.ToString("WO-######");
+            return "WO-" + numberId.ToString("D6");
         }
 
         private int GetNextId()
