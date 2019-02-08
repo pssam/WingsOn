@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 
@@ -16,9 +17,19 @@ namespace WingsOn.Api.ExceptionHandling
         public void OnException(ExceptionContext context)
         {
             var exception = context.Exception;
-            _logger.LogError(exception, "Internal error happened.");
-            var clientError = new ClientError{Message = "Something went wrong"};
-            context.Result = new JsonResult(clientError);
+            _logger.LogError(exception, $"Internal error happened {context.HttpContext.Request.Path}{context.HttpContext.Request.QueryString}");
+            var clientError = new ClientError { Message = "Something went wrong" };
+
+            var validationException = exception as ValidationException;
+            if (validationException != null)
+            {
+                _logger.LogError($"Internal details: {validationException.Details}");
+                clientError.Message = validationException.Message;
+            }
+
+            var result = new JsonResult(clientError);
+            result.StatusCode = (int)HttpStatusCode.BadRequest;
+            context.Result = result;
         }
     }
 }

@@ -7,18 +7,27 @@ namespace WingsOn.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonController : ControllerBase
+    public class PersonsController : ControllerBase
     {
         private readonly IRepository<Person> _personRepository;
 
-        public PersonController(IRepository<Person> personRepository)
+        public PersonsController(IRepository<Person> personRepository)
         {
             _personRepository = personRepository;
         }
 
-        public ActionResult<IEnumerable<Person>> GetPersons()
+        [HttpGet]
+        public ActionResult<IEnumerable<Person>> Get()
         {
             var result = _personRepository.GetAll();
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public ActionResult<Person> GetPerson(int id)
+        {
+            var result = _personRepository.Get(id);
             return Ok(result);
         }
     }

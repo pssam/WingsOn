@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using WingsOn.Api.BusinessLogic.CommandHandlers;
+using WingsOn.Api.BusinessLogic.Factories;
 using WingsOn.Api.ExceptionHandling;
 using WingsOn.Dal;
 using WingsOn.Domain;
@@ -29,6 +31,7 @@ namespace WingsOn.Api
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwaggerDocument();
             RegisterRepositories(services);
+            RegisterBusinessLogic(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +50,13 @@ namespace WingsOn.Api
             app.UseMvc();
         }
 
+        private void RegisterBusinessLogic(IServiceCollection services)
+        {
+            services.AddTransient<IAddPassangerCommandHandler, AddPassangerCommandHandler>();
+
+            services.AddTransient<IBookingFactory, BookingFactory>();
+        }
+
         private static void InitilaizeLogger(IConfiguration configuration)
         {
             Log.Logger = new LoggerConfiguration()
@@ -56,7 +66,9 @@ namespace WingsOn.Api
 
         private static void RegisterRepositories(IServiceCollection services)
         {
-            services.AddScoped<IRepository<Person>, PersonRepository>();
+            services.AddSingleton<IRepository<Person>, PersonRepository>();
+            services.AddSingleton<IRepository<Booking>, BookingRepository>();
+            services.AddSingleton<IRepository<Flight>, FlightRepository>();
         }
     }
 }
