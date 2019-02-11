@@ -37,7 +37,7 @@ namespace WingsOn.Api.BusinessLogic.CommandHandlers
             }
 
             var passanger = _personRepository.Get(passangerId);
-            if (customer == null)
+            if (passanger == null)
             {
                 throw new ValidationException("Passanger doesn not exist");
             }

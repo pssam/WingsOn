@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using WingsOn.Dal;
+using WingsOn.Api.BusinessLogic.QueryHandlers;
 using WingsOn.Domain;
 
 namespace WingsOn.Api.Controllers
@@ -10,18 +10,19 @@ namespace WingsOn.Api.Controllers
     [ApiController]
     public class PassangersController : ControllerBase
     {
-        private readonly IRepository<Booking> _bookingRepository;
+        private readonly IGetPassangersQueryHandler _getPassangersQueryHandler;
 
-        public PassangersController(IRepository<Booking> bookingRepository)
+        public PassangersController(IGetPassangersQueryHandler getPassangersQueryHandler)
         {
-            _bookingRepository = bookingRepository;
+            _getPassangersQueryHandler = getPassangersQueryHandler;
         }
 
         [HttpGet]
         [Route("{gender}")]
-        public ActionResult<IEnumerable<Person>> Get(GenderType gender)
+        public ActionResult<IEnumerable<Person>> Get(string flightNumber, GenderType gender)
         {
-            var passangers = _bookingRepository.GetAll().SelectMany(x => x.Passengers).Where(x => x.Gender == gender);
+            var passangers = _getPassangersQueryHandler.Handle(flightNumber, gender);
+
             return Ok(passangers);
         }
     }
