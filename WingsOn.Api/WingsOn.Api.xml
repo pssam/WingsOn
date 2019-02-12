@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WingsOn.Api</name>
+    </assembly>
+    <members>
+        <member name="M:WingsOn.Api.Controllers.BookingsController.AddPassenger(WingsOn.Api.ViewModels.AddPassengerViewModel)">
+            <summary>
+            Creates a booking of an existing flight for a new passenger.
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WingsOn.Api.Controllers.PassengersController.Get(System.String,System.Nullable{WingsOn.Domain.GenderType})">
+            <summary>
+            Returns all passengers.
+            </summary>
+            <param name="flightNumber">Filters passengers by flight (example: 'PZ696')</param>
+            <param name="gender">Filters passengers by gender (example: 0)</param>
+            <returns></returns>
+        </member>
+        <member name="M:WingsOn.Api.Controllers.PersonsController.Get">
+            <summary>
+            Returns a list of all persons.
+            </summary>
+        </member>
+        <member name="M:WingsOn.Api.Controllers.PersonsController.GetPerson(System.Int32)">
+            <summary>
+            Returns a person by Id.
+            </summary>
+        </member>
+        <member name="M:WingsOn.Api.Controllers.PersonsController.UpdateAddress(System.Int32,WingsOn.Api.ViewModels.UpdateAddressViewModel)">
+            <summary>
+            Update person's Address.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -22,6 +22,9 @@ namespace WingsOn.Api.Controllers
             _updatePersonAddressCommandHandler = updatePersonAddressCommandHandler;
         }
 
+        /// <summary>
+        /// Returns a list of all persons.
+        /// </summary>
         [HttpGet]
         public ActionResult<IEnumerable<Person>> Get()
         {
@@ -29,6 +32,9 @@ namespace WingsOn.Api.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Returns a person by Id.
+        /// </summary>
         [HttpGet]
         [Route("{id}")]
         public ActionResult<Person> GetPerson(int id)
@@ -37,6 +43,9 @@ namespace WingsOn.Api.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Update person's Address.
+        /// </summary>
         [HttpPut]
         [Route("{id}/[action]")]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]

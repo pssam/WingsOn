@@ -10,7 +10,7 @@ namespace WingsOn.Api.Controllers
     [ApiController]
     public class BookingsController : ControllerBase
     {
-        private static readonly object LockObject = new object();
+        private static readonly object _lockObject = new object();
         private readonly IAddPassengerCommandHandler _addPassengerCommandHandler;
 
         public BookingsController(IAddPassengerCommandHandler addPassengerCommandHandler)
@@ -18,13 +18,18 @@ namespace WingsOn.Api.Controllers
             _addPassengerCommandHandler = addPassengerCommandHandler;
         }
 
+        /// <summary>
+        /// Creates a booking of an existing flight for a new passenger.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ClientError), (int)HttpStatusCode.BadRequest)]
         public ActionResult AddPassenger([FromBody] AddPassengerViewModel args)
         {
-            lock (LockObject)
+            lock (_lockObject)
             {
                 _addPassengerCommandHandler.Handle(args.FlightNumber, args.CustomerId, args.PassengerId);
             }
