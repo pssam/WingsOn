@@ -1,0 +1,1 @@
+c:\Users\Siarhei_Rabau\.nuget\packages\opencover\4.7.922\tools\OpenCover.Console.exe    -target:"c:\Program Files\dotnet\dotnet.exe"    -targetargs:"test --no-build" -excludebyattribute:*.ExcludeFromCodeCoverage*    -output:coverage.xml    -oldStyle    -filter:"+[WingsOn.*]* -[WingsOn.*Tests]*"    -register:user

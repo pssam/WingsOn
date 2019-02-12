@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace WingsOn.Api.ExceptionHandling
 {
+    [ExcludeFromCodeCoverage]
     public class ValidationException : Exception
     {
         public string Details { get; }

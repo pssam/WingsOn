@@ -1,0 +1,1 @@
+"c:\Program Files\dotnet\dotnet.exe" c:\Users\Siarhei_Rabau\.nuget\packages\reportgenerator\4.0.11\tools\netcoreapp2.0\ReportGenerator.dll -reports:coverage.xml -targetdir:coveragereport
