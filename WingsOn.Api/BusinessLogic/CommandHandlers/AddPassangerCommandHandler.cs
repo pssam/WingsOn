@@ -6,14 +6,14 @@ using WingsOn.Domain;
 
 namespace WingsOn.Api.BusinessLogic.CommandHandlers
 {
-    public class AddPassangerCommandHandler: IAddPassangerCommandHandler
+    public class AddPassengerCommandHandler: IAddPassengerCommandHandler
     {
         private readonly IRepository<Booking> _bookingRepository;
         private readonly IRepository<Flight> _flightRepository;
         private readonly IRepository<Person> _personRepository;
         private readonly IBookingFactory _bookingFactory;
 
-        public AddPassangerCommandHandler(IRepository<Booking> bookingRepository, IRepository<Flight> flightRepository,
+        public AddPassengerCommandHandler(IRepository<Booking> bookingRepository, IRepository<Flight> flightRepository,
             IRepository<Person> personRepository, IBookingFactory bookingFactory)
         {
             _bookingRepository = bookingRepository;
@@ -22,7 +22,7 @@ namespace WingsOn.Api.BusinessLogic.CommandHandlers
             _bookingFactory = bookingFactory;
         }
 
-        public void Handle(string flightNumber, int customerId, int passangerId)
+        public void Handle(string flightNumber, int customerId, int passengerId)
         {
             var flight = _flightRepository.GetAll().SingleOrDefault(x => x.Number == flightNumber);
             if (flight == null)
@@ -36,32 +36,32 @@ namespace WingsOn.Api.BusinessLogic.CommandHandlers
                 throw new ValidationException("Customer doesn not exist");
             }
 
-            var passanger = _personRepository.Get(passangerId);
-            if (passanger == null)
+            var passenger = _personRepository.Get(passengerId);
+            if (passenger == null)
             {
-                throw new ValidationException("Passanger doesn not exist");
+                throw new ValidationException("Passenger doesn not exist");
             }
 
-            var existingPassangerBooking = FindBooking(flightNumber, passangerId);
-            if (existingPassangerBooking != null)
+            var existingPassengerBooking = FindBooking(flightNumber, passengerId);
+            if (existingPassengerBooking != null)
             {
-                throw new ValidationException("The Passanger is already registered for the flight");
+                throw new ValidationException("The Passenger is already registered for the flight");
             }
 
             var newBooking = _bookingFactory.Create();
             newBooking.Customer = customer;
             newBooking.Flight = flight;
-            newBooking.Passengers = new[] { passanger };
+            newBooking.Passengers = new[] { passenger };
             _bookingRepository.Save(newBooking);
         }
 
-        private Booking FindBooking(string flightNumber, int passangerId)
+        private Booking FindBooking(string flightNumber, int passengerId)
         {
-            var existingPassangerBooking = _bookingRepository.GetAll().FirstOrDefault(x =>
+            var existingPassengerBooking = _bookingRepository.GetAll().FirstOrDefault(x =>
                 x.Flight.Number == flightNumber &&
-                x.Passengers.Any(flightPassanger =>
-                    flightPassanger.Id == passangerId));
-            return existingPassangerBooking;
+                x.Passengers.Any(flightPassenger =>
+                    flightPassenger.Id == passengerId));
+            return existingPassengerBooking;
         }
     }
 }

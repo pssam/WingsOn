@@ -22,7 +22,7 @@ namespace WingsOn.Api.IntegrationXTests.Controllers
         }
 
         [Fact]
-        public void AddPassanger_ShouldCreateBooking()
+        public void AddPassenger_ShouldCreateBooking()
         {
             var client = _applicationFactory.CreateClient();
 

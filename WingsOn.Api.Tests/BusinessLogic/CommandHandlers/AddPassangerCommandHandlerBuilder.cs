@@ -6,7 +6,7 @@ using WingsOn.Domain;
 
 namespace WingsOn.Api.Tests.BusinessLogic.CommandHandlers
 {
-    internal class AddPassangerCommandHandlerBuilder
+    internal class AddPassengerCommandHandlerBuilder
     {
         public Mock<IRepository<Booking>> BookingRepository { get; set; } = new Mock<IRepository<Booking>>();
 
@@ -20,34 +20,34 @@ namespace WingsOn.Api.Tests.BusinessLogic.CommandHandlers
 
         public Person Person { get; private set; }
 
-        public AddPassangerCommandHandler Build()
+        public AddPassengerCommandHandler Build()
         {
-            return new AddPassangerCommandHandler(BookingRepository.Object, FlightRepository.Object,
+            return new AddPassengerCommandHandler(BookingRepository.Object, FlightRepository.Object,
                 PersonRepository.Object, BookingFactory.Object);
         }
 
-        public AddPassangerCommandHandlerBuilder WithPerson(int personId)
+        public AddPassengerCommandHandlerBuilder WithPerson(int personId)
         {
             Person = new Person { Id = personId };
             PersonRepository.Setup(x => x.Get(personId)).Returns(Person);
             return this;
         }
 
-        public AddPassangerCommandHandlerBuilder WithFlight(string flightNumber)
+        public AddPassengerCommandHandlerBuilder WithFlight(string flightNumber)
         {
             Flight = new Flight { Number = flightNumber };
             FlightRepository.Setup(x => x.GetAll()).Returns(new[] { Flight, });
             return this;
         }
 
-        public AddPassangerCommandHandlerBuilder WithPassanger(string flightNumber, int passangerId)
+        public AddPassengerCommandHandlerBuilder WithPassenger(string flightNumber, int passengerId)
         {
             BookingRepository.Setup(x => x.GetAll()).Returns(new[]
             {
                 new Booking
                 {
                     Flight = new Flight { Number = flightNumber },
-                    Passengers = new[] { new Person { Id = passangerId }, }
+                    Passengers = new[] { new Person { Id = passengerId }, }
                 },
             });
             return this;

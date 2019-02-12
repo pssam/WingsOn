@@ -11,11 +11,11 @@ namespace WingsOn.Api.Controllers
     public class BookingsController : ControllerBase
     {
         private static readonly object LockObject = new object();
-        private readonly IAddPassangerCommandHandler _addPassangerCommandHandler;
+        private readonly IAddPassengerCommandHandler _addPassengerCommandHandler;
 
-        public BookingsController(IAddPassangerCommandHandler addPassangerCommandHandler)
+        public BookingsController(IAddPassengerCommandHandler addPassengerCommandHandler)
         {
-            _addPassangerCommandHandler = addPassangerCommandHandler;
+            _addPassengerCommandHandler = addPassengerCommandHandler;
         }
 
         [HttpPost]
@@ -26,7 +26,7 @@ namespace WingsOn.Api.Controllers
         {
             lock (LockObject)
             {
-                _addPassangerCommandHandler.Handle(args.FlightNumber, args.CustomerId, args.PassengerId);
+                _addPassengerCommandHandler.Handle(args.FlightNumber, args.CustomerId, args.PassengerId);
             }
 
             return Ok();

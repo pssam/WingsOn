@@ -19,11 +19,11 @@ namespace WingsOn.Api.IntegrationXTests.Controllers
         }
 
         [Fact]
-        public void Get_ShouldReturnListOfAllPassangers()
+        public void Get_ShouldReturnListOfAllPassengers()
         {
             var client = _applicationFactory.CreateClient();
 
-            var response = client.GetAsync("api/passangers").Result;
+            var response = client.GetAsync("api/passengers").Result;
             var actual = RequestHelper.ReadResponse<Person[]>(response);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -31,11 +31,11 @@ namespace WingsOn.Api.IntegrationXTests.Controllers
         }
 
         [Fact]
-        public void Get_WhenFiltersArePassed_ShouldFilterPassangers()
+        public void Get_WhenFiltersArePassed_ShouldFilterPassengers()
         {
             var client = _applicationFactory.CreateClient();
 
-            var response = client.GetAsync("api/passangers?flightNumber=BB124&gender=0").Result;
+            var response = client.GetAsync("api/passengers?flightNumber=BB124&gender=0").Result;
             var actual = RequestHelper.ReadResponse<Person[]>(response);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);

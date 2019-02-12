@@ -8,21 +8,21 @@ namespace WingsOn.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PassangersController : ControllerBase
+    public class PassengersController : ControllerBase
     {
-        private readonly IGetPassangersQueryHandler _getPassangersQueryHandler;
+        private readonly IGetPassengersQueryHandler _getPassengersQueryHandler;
 
-        public PassangersController(IGetPassangersQueryHandler getPassangersQueryHandler)
+        public PassengersController(IGetPassengersQueryHandler getPassengersQueryHandler)
         {
-            _getPassangersQueryHandler = getPassangersQueryHandler;
+            _getPassengersQueryHandler = getPassengersQueryHandler;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Person>> Get(string flightNumber, GenderType? gender)
         {
-            var passangers = _getPassangersQueryHandler.Handle(flightNumber, gender);
+            var passengers = _getPassengersQueryHandler.Handle(flightNumber, gender);
 
-            return Ok(passangers);
+            return Ok(passengers);
         }
     }
 }

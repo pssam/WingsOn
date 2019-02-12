@@ -6,12 +6,12 @@ using WingsOn.Domain;
 
 namespace WingsOn.Api.BusinessLogic.QueryHandlers
 {
-    public class GetPassangersQueryHandler
-        : IGetPassangersQueryHandler
+    public class GetPassengersQueryHandler
+        : IGetPassengersQueryHandler
     {
         private readonly IRepository<Booking> _bookingRepository;
 
-        public GetPassangersQueryHandler(IRepository<Booking> bookingRepository)
+        public GetPassengersQueryHandler(IRepository<Booking> bookingRepository)
         {
             _bookingRepository = bookingRepository;
         }
@@ -19,19 +19,19 @@ namespace WingsOn.Api.BusinessLogic.QueryHandlers
         public IEnumerable<Person> Handle(string flightNumber, GenderType? gender)
         {
             var bookings = LoadBookings(flightNumber);
-            var passangers = SelectPassangers(bookings, gender);
-            return passangers;
+            var passengers = SelectPassengers(bookings, gender);
+            return passengers;
         }
 
-        private static IEnumerable<Person> SelectPassangers(IEnumerable<Booking> bookings, GenderType? gender)
+        private static IEnumerable<Person> SelectPassengers(IEnumerable<Booking> bookings, GenderType? gender)
         {
-            var passangers = bookings.SelectMany(x => x.Passengers).Distinct(x => x.Id);
+            var passengers = bookings.SelectMany(x => x.Passengers).Distinct(x => x.Id);
             if (gender != null)
             {
-                passangers = passangers.Where(x => x.Gender == gender);
+                passengers = passengers.Where(x => x.Gender == gender);
             }
 
-            return passangers;
+            return passengers;
         }
 
         private IEnumerable<Booking> LoadBookings(string flightNumber)

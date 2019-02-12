@@ -53,10 +53,10 @@ namespace WingsOn.Api
 
         private void RegisterBusinessLogic(IServiceCollection services)
         {
-            services.AddTransient<IAddPassangerCommandHandler, AddPassangerCommandHandler>();
+            services.AddTransient<IAddPassengerCommandHandler, AddPassengerCommandHandler>();
             services.AddTransient<IUpdatePersonAddressCommandHandler, UpdatePersonAddressCommandHandler>();
 
-            services.AddTransient<IGetPassangersQueryHandler, GetPassangersQueryHandler>();
+            services.AddTransient<IGetPassengersQueryHandler, GetPassengersQueryHandler>();
 
             services.AddTransient<IBookingFactory, BookingFactory>();
         }

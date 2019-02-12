@@ -8,83 +8,83 @@ using WingsOn.Domain;
 namespace WingsOn.Api.Tests.BusinessLogic.QueryHandlers
 {
     [TestClass]
-    public class GetPassangersQueryHandlerTest
+    public class GetPassengersQueryHandlerTest
     {
         [TestMethod]
-        public void Handle_WhenFlightPassed_ShoudFilterPassangers()
+        public void Handle_WhenFlightPassed_ShoudFilterPassengers()
         {
             Mock<IRepository<Booking>> repository = new Mock<IRepository<Booking>>();
-            var passanger1 = new Person { Id = 1 };
-            var passanger2 = new Person { Id = 2 };
+            var passenger1 = new Person { Id = 1 };
+            var passenger2 = new Person { Id = 2 };
             repository.Setup(x => x.GetAll()).Returns(new[]
             {
                 new Booking
                 {
                     Flight = new Flight { Number = "tst" },
-                    Passengers = new[] { passanger1 }
+                    Passengers = new[] { passenger1 }
                 },
                 new Booking
                 {
                     Flight = new Flight { Number = "miss" },
-                    Passengers = new[] { passanger2 }
+                    Passengers = new[] { passenger2 }
                 },
             });
-            var handler = new GetPassangersQueryHandler(repository.Object);
+            var handler = new GetPassengersQueryHandler(repository.Object);
 
             var actual = handler.Handle("tst", null);
 
-            actual.Should().BeEquivalentTo(passanger1);
+            actual.Should().BeEquivalentTo(passenger1);
         }
 
         [TestMethod]
-        public void Handle_WhenNoFilters_ShoudReturnAllPassangersWithoutDplication()
+        public void Handle_WhenNoFilters_ShoudReturnAllPassengersWithoutDplication()
         {
             Mock<IRepository<Booking>> repository = new Mock<IRepository<Booking>>();
-            var passanger = new Person { Id = 1 };
+            var passenger = new Person { Id = 1 };
             repository.Setup(x => x.GetAll()).Returns(new[]
             {
                 new Booking
                 {
                     Flight = new Flight { Number = "f1" },
-                    Passengers = new[] { passanger }
+                    Passengers = new[] { passenger }
                 },
                 new Booking
                 {
                     Flight = new Flight { Number = "f2" },
-                    Passengers = new[] { passanger }
+                    Passengers = new[] { passenger }
                 },
             });
-            var handler = new GetPassangersQueryHandler(repository.Object);
+            var handler = new GetPassengersQueryHandler(repository.Object);
 
             var actual = handler.Handle(null, null);
 
-            actual.Should().BeEquivalentTo(passanger);
+            actual.Should().BeEquivalentTo(passenger);
         }
 
         [TestMethod]
         public void Handle_WhenGenderPassed_ShoudFilterByGender()
         {
             Mock<IRepository<Booking>> repository = new Mock<IRepository<Booking>>();
-            var malePassanger = new Person { Id = 1, Gender = GenderType.Male};
-            var femalePassanger = new Person { Id = 2, Gender = GenderType.Female};
+            var malePassenger = new Person { Id = 1, Gender = GenderType.Male};
+            var femalePassenger = new Person { Id = 2, Gender = GenderType.Female};
             repository.Setup(x => x.GetAll()).Returns(new[]
             {
                 new Booking
                 {
                     Flight = new Flight { Number = "f1" },
-                    Passengers = new[] { malePassanger }
+                    Passengers = new[] { malePassenger }
                 },
                 new Booking
                 {
                     Flight = new Flight { Number = "f2" },
-                    Passengers = new[] { femalePassanger }
+                    Passengers = new[] { femalePassenger }
                 },
             });
-            var handler = new GetPassangersQueryHandler(repository.Object);
+            var handler = new GetPassengersQueryHandler(repository.Object);
 
             var actual = handler.Handle(null, GenderType.Male);
 
-            actual.Should().BeEquivalentTo(malePassanger);
+            actual.Should().BeEquivalentTo(malePassenger);
         }
     }
 }
