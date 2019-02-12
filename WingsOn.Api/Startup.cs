@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using WingsOn.Api.BusinessLogic.CommandHandlers;
 using WingsOn.Api.BusinessLogic.Factories;
+using WingsOn.Api.BusinessLogic.QueryHandlers;
 using WingsOn.Api.ExceptionHandling;
 using WingsOn.Dal;
 using WingsOn.Domain;
@@ -53,6 +54,9 @@ namespace WingsOn.Api
         private void RegisterBusinessLogic(IServiceCollection services)
         {
             services.AddTransient<IAddPassangerCommandHandler, AddPassangerCommandHandler>();
+            services.AddTransient<IUpdatePersonAddressCommandHandler, UpdatePersonAddressCommandHandler>();
+
+            services.AddTransient<IGetPassangersQueryHandler, GetPassangersQueryHandler>();
 
             services.AddTransient<IBookingFactory, BookingFactory>();
         }

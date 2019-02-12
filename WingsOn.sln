@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WingsOn.Domain", "WingsOn.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WingsOn.Api", "WingsOn.Api\WingsOn.Api.csproj", "{1F2750A8-ABDA-41DB-A549-A4C2BAB02489}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WingsOn.Api.Tests", "WingsOn.Api.Tests\WingsOn.Api.Tests.csproj", "{7D5FF500-C8FF-4B8B-A2D3-822A9833FAD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WingsOn.Api.Tests", "WingsOn.Api.Tests\WingsOn.Api.Tests.csproj", "{7D5FF500-C8FF-4B8B-A2D3-822A9833FAD9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WingsOn.Api.IntegrationXTests", "WingsOn.Api.IntegrationXTests\WingsOn.Api.IntegrationXTests.csproj", "{A3EAC28F-5637-4FE5-B5BD-E611DBA27E3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7D5FF500-C8FF-4B8B-A2D3-822A9833FAD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D5FF500-C8FF-4B8B-A2D3-822A9833FAD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D5FF500-C8FF-4B8B-A2D3-822A9833FAD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3EAC28F-5637-4FE5-B5BD-E611DBA27E3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3EAC28F-5637-4FE5-B5BD-E611DBA27E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3EAC28F-5637-4FE5-B5BD-E611DBA27E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3EAC28F-5637-4FE5-B5BD-E611DBA27E3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

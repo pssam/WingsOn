@@ -18,8 +18,7 @@ namespace WingsOn.Api.Controllers
         }
 
         [HttpGet]
-        [Route("{gender}")]
-        public ActionResult<IEnumerable<Person>> Get(string flightNumber, GenderType gender)
+        public ActionResult<IEnumerable<Person>> Get(string flightNumber, GenderType? gender)
         {
             var passangers = _getPassangersQueryHandler.Handle(flightNumber, gender);
 

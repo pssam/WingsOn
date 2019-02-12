@@ -20,8 +20,7 @@ namespace WingsOn.Api.ExceptionHandling
             _logger.LogError(exception, $"Internal error happened {context.HttpContext.Request.Path}{context.HttpContext.Request.QueryString}");
             var clientError = new ClientError { Message = "Something went wrong" };
 
-            var validationException = exception as ValidationException;
-            if (validationException != null)
+            if (exception is ValidationException validationException)
             {
                 _logger.LogError($"Internal details: {validationException.Details}");
                 clientError.Message = validationException.Message;

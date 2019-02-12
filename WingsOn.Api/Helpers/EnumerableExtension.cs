@@ -8,7 +8,7 @@ namespace WingsOn.Api.Helpers
     {
         public static IEnumerable<TValue> Distinct<TValue, TId>(this IEnumerable<TValue> source, Func<TValue, TId> getId)
         {
-            return source.GroupBy(value => getId(value)).Select(group => group.First());
+            return source.GroupBy(getId).Select(group => group.First());
         }
     }
 }

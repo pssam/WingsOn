@@ -3,6 +3,7 @@ using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using WingsOn.Api.BusinessLogic.CommandHandlers;
 using WingsOn.Api.ExceptionHandling;
+using WingsOn.Api.ViewModels;
 using WingsOn.Dal;
 using WingsOn.Domain;
 
@@ -40,10 +41,11 @@ namespace WingsOn.Api.Controllers
         [Route("{id}/[action]")]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ClientError), (int)HttpStatusCode.BadRequest)]
-        public ActionResult UpdateAddress(int id, string newAddress)
+        public ActionResult UpdateAddress(int id, [FromBody] UpdateAddressViewModel newAddress)
         {
-            _updatePersonAddressCommandHandler.Handle(id, newAddress);
-            return Ok();
+            _updatePersonAddressCommandHandler.Handle(id, newAddress.Address);
+            var result = Ok();
+            return result;
         }
     }
 }
