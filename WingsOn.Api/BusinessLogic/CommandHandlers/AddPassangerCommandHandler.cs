@@ -27,19 +27,19 @@ namespace WingsOn.Api.BusinessLogic.CommandHandlers
             var flight = _flightRepository.GetAll().SingleOrDefault(x => x.Number == flightNumber);
             if (flight == null)
             {
-                throw new ValidationException("Flight doesn not exist");
+                throw new ValidationException("Flight does not exist");
             }
 
             var customer = _personRepository.Get(customerId);
             if (customer == null)
             {
-                throw new ValidationException("Customer doesn not exist");
+                throw new ValidationException("Customer does not exist");
             }
 
             var passenger = _personRepository.Get(passengerId);
             if (passenger == null)
             {
-                throw new ValidationException("Passenger doesn not exist");
+                throw new ValidationException("Passenger does not exist");
             }
 
             var existingPassengerBooking = FindBooking(flightNumber, passengerId);
